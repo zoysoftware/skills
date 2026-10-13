@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="es" data-delivery="inline">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Una explicación que encaja en el chat</title>
+  <style>
+    :root {
+      --hc-background: #ffffff;
+      --hc-foreground: #202124;
+      --hc-muted-foreground: #565c65;
+      --hc-card: #f6f7f9;
+      --hc-border: #d3d7de;
+      --hc-accent: #3156b8;
+      --hc-accent-surface: #edf2ff;
+      --hc-accent-text: #28499b;
+      --hc-code: #f0f2f5;
+    }
+    :root[data-delivery="standalone"] { color-scheme: light dark; }
+    @media (prefers-color-scheme: dark) {
+      :root[data-delivery="standalone"] {
+        --hc-background: #18191b;
+        --hc-foreground: #eceef2;
+        --hc-muted-foreground: #afb5bf;
+        --hc-card: #232529;
+        --hc-border: #444952;
+        --hc-accent: #a5b9ff;
+        --hc-accent-surface: #252f49;
+        --hc-accent-text: #c2d0ff;
+        --hc-code: #2b2d33;
+      }
+    }
+    * { box-sizing: border-box; }
+    html {
+      background: transparent;
+      color: var(--foreground, var(--hc-foreground));
+      font-family: var(--font-sans, system-ui, -apple-system, "Segoe UI", sans-serif);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    body { margin: 0; background: transparent; }
+    main { width: 100%; min-width: 0; }
+    html[data-delivery="standalone"] {
+      background: var(--background, var(--hc-background));
+    }
+    html[data-delivery="standalone"] body {
+      max-width: 960px;
+      margin-inline: auto;
+      padding: 24px;
+    }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: 1.3rem; line-height: 1.35; font-weight: 650; }
+    h2 { font-size: 1.05rem; line-height: 1.4; font-weight: 650; }
+    h3 { font-size: 1rem; line-height: 1.4; font-weight: 650; }
+    p { overflow-wrap: anywhere; }
+    p + p { margin-top: 8px; }
+    .lead { margin-top: 8px; max-width: 72ch; }
+    .muted { color: var(--muted-foreground, var(--hc-muted-foreground)); }
+    .section { margin-top: 24px; }
+    .alternatives {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .panel {
+      min-width: 0;
+      padding: 16px;
+      border: 1px solid var(--border, var(--hc-border));
+      border-radius: var(--radius, 0.625rem);
+      background: var(--card, var(--hc-card));
+      color: var(--card-foreground, var(--hc-foreground));
+    }
+    .panel p { margin-top: 8px; }
+    .recommended {
+      background: var(--accent-surface, var(--hc-accent-surface));
+      color: var(--accent-surface-foreground, var(--hc-accent-text));
+    }
+    .recommendation { display: block; margin-top: 12px; font-weight: 600; }
+    .table-region { max-width: 100%; overflow: auto; margin-top: 12px; }
+    table { width: 100%; min-width: 24em; table-layout: fixed; border-collapse: collapse; font-size: 0.93rem; }
+    caption { text-align: left; margin-bottom: 8px; color: var(--muted-foreground, var(--hc-muted-foreground)); }
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      padding: 10px 12px 10px 0;
+      border-bottom: 1px solid var(--border, var(--hc-border));
+      overflow-wrap: normal;
+    }
+    th:last-child, td:last-child { padding-right: 0; }
+    th { font-weight: 600; }
+    th:first-child { width: 26%; }
+    code {
+      font-family: var(--font-mono, "SF Mono", Consolas, monospace);
+      font-size: 0.88em;
+      overflow-wrap: anywhere;
+      background: var(--code-background, var(--hc-code));
+      color: var(--code-foreground, var(--hc-foreground));
+      border-radius: 3px;
+      padding: 2px 4px;
+    }
+    details { border-top: 1px solid var(--border, var(--hc-border)); padding-top: 12px; }
+    summary { cursor: pointer; font-weight: 550; }
+    details p { margin-top: 10px; }
+    a { color: var(--accent, var(--hc-accent)); text-underline-offset: 3px; }
+    :focus-visible {
+      outline: 2px solid var(--ring, var(--hc-accent));
+      outline-offset: -2px;
+    }
+    @media (max-width: 520px) {
+      .alternatives { grid-template-columns: minmax(0, 1fr); }
+      html[data-delivery="standalone"] body { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <main aria-labelledby="answer">
+    <h1 id="answer">La explicación vive dentro del chat</h1>
+    <p class="lead">El análisis comparte el tema y el ancho de la conversación.
+      La recomendación aparece primero; la evidencia queda a una apertura de distancia.</p>
+
+    <section class="section" aria-labelledby="delivery">
+      <h2 id="delivery">Elige según cómo vas a leerlo</h2>
+      <div class="alternatives">
+        <article class="panel recommended" aria-labelledby="option-a">
+          <h3 id="option-a">A. Leer en la conversación</h3>
+          <p>El contenido sigue el tema del chat y se apila en el móvil.
+            Puedes ampliar la página para revisar el detalle.</p>
+          <span class="recommendation">Recomendado para conversar sobre una decisión</span>
+        </article>
+        <article class="panel" aria-labelledby="option-b">
+          <h3 id="option-b">B. Guardar un archivo</h3>
+          <p>Un HTML autónomo conserva la explicación y sus recursos para
+            leerlos fuera de T3 Code, sin conexión.</p>
+          <p>Útil cuando necesitas archivar o compartir el documento.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="criteria">
+      <h2 id="criteria">La misma información, dos formas de entrega</h2>
+      <div class="table-region" role="region" aria-labelledby="criteria" tabindex="0">
+        <table>
+          <caption>Ejemplo de comparación, sin datos de negocio</caption>
+          <thead><tr><th scope="col">Criterio</th><th scope="col">A. En el chat</th><th scope="col">B. Archivo HTML</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Apariencia</th><td>Tema activo de T3</td><td>Modo claro u oscuro del dispositivo</td></tr>
+            <tr><th scope="row">Lectura</th><td>Integrada en la respuesta</td><td>Documento independiente</td></tr>
+            <tr><th scope="row">Revisión</th><td>Ampliar y consultar fuentes</td><td>Abrir y conservar el archivo</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <details class="section">
+      <summary>Fuentes y alcance de esta muestra</summary>
+      <p>La <a href="https://github.com/pingdotgg/t3code/blob/e9221e44dadd78126c83d2eeed0b51c25dcf0fb4/docs/user/html-renders.md">documentación de respuestas visuales de T3 Code</a>
+        describe la integración con el tema, la ampliación y el guardado.
+        Esta muestra usa HTML, CSS y un desplegable nativo.</p>
+      <p>Es una base visual reutilizable. Al crear otro análisis, sustituye esta
+        comparación por el contenido y las fuentes de la decisión real.</p>
+    </details>
+  </main>
+</body>
+</html>
