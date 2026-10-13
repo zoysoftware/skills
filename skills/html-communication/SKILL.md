@@ -1,97 +1,146 @@
 ---
 name: html-communication
-description: Write self-contained HTML specifications, audits, technical plans and visual option comparisons. Use when communicating analysis in an HTML document, not when implementing a product website.
+description: Write visual explanations, specifications, audits, technical plans and UI comparisons as self-contained HTML. Prefer theme-aware inline replies through T3 Code's html_preview and html_render when available; deliver a standalone file otherwise. Not for implementing product websites.
 ---
 
 # HTML communication
 
-## Required output
+Explain the decision or relationship visually. In T3 Code, make the page feel
+like part of the reply, with the chat's theme, typography and reading width.
 
-- Deliver exactly one self-contained UTF-8 HTML file, at most **512,000 bytes** including CSS, SVG and embedded assets. This conservative cap satisfies 512K. Aim smaller.
-- Default to dark mode with explicit readable background/text colors and `color-scheme: dark`. Use system fonts and inline CSS. No external fonts, stylesheets, images, frames or runtime dependencies.
-- **No JavaScript.** No script elements, event handlers, JavaScript URLs, frameworks or JS-driven diagrams. Use semantic HTML, CSS, inline SVG, tables, anchors and native `details`/`summary`. All substantive content must be readable without execution or network access.
-- Write a specification, not a landing page. Start with purpose, status and the decision needed. Present current behavior, evidence, constraints, alternatives, tradeoffs, recommendation and acceptance criteria as appropriate. No sales hero, slogans, decorative KPI cards or fake controls.
-- Read and apply the installed **unslop** skill before drafting and again before delivery. Resolve it through the agent's skill catalog or the sibling `../unslop/SKILL.md`; do not assume a username, operating system or global installation path. Install both skills when sharing this package. Do not duplicate its rules here. Never use em dashes, including HTML entities that render as em dashes.
-- Distinguish observed facts, measurements, assumptions and proposals. Cite evidence close to the claim. Do not fabricate benchmark results, financial savings or completed actions.
+## Choose delivery
 
-## Make the explanation visual
+- When the current runtime exposes `html_preview` and `html_render`, use the
+  native inline flow. Names may have an MCP prefix. Read
+  [the T3 Code contract](references/t3-code.md) before drafting for this mode,
+  and prefer the live tool definitions if their contract has changed.
+- When the user explicitly requests a downloadable HTML file, or native tools
+  are unavailable, deliver one standalone UTF-8 file. Use the current app's
+  private attachment mechanism when available, otherwise a local file link.
+  A local file is a valid delivery; do not require hosting or invent an upload
+  destination. A request for a document does not authorize public publishing.
+- Build one self-contained document, at most **512,000 UTF-8 bytes** including
+  inline CSS, SVG, scripts and embedded assets. Keep it smaller when practical.
+  No external fonts, stylesheets, frames or runtime dependencies by default.
+  Inline local images for file delivery; T3's native tools can embed them from
+  absolute paths. Evidence links may point to their original sources.
 
-Start by identifying what the reader must understand or decide. Choose the visual
-that exposes that relationship before styling the page. A workflow benefits from
-a sequence, a system from a map of responsibilities, and a choice from comparable
-alternatives. A simple fact may need only a sentence. Do not turn every paragraph
-into a card or force every document into the same dashboard template.
+## Explain before styling
+
+Read and apply the installed **unslop** skill before drafting and before
+delivery. Resolve it through the runtime catalog or `../unslop/SKILL.md`, never
+an assumed global path. Install both skills when sharing this package. Never
+use em dashes, including HTML entities that render as em dashes.
+
+Start with the answer or recommendation and the reason that matters. Include
+purpose, status and the decision needed when relevant. Distinguish observed
+facts, measurements, assumptions, synthetic examples and proposals. Cite
+evidence close to its claim. Do not invent results, savings or completed work.
+
+Choose a visual that exposes what the reader must understand. A simple fact
+may need only a sentence. Do not turn every paragraph into a card or force every
+document into a dashboard.
 
 | Reader's question | Useful form | What it must reveal |
 | --- | --- | --- |
 | What changes? | Before/after with matching examples | The concrete difference and its consequence |
 | How does this work? | Labeled steps or an inline SVG flow | Order, ownership, inputs and outputs |
-| Where is the problem? | Annotated diagram or compact evidence table | The failing point and the evidence supporting it |
+| Where is the problem? | Annotated diagram or compact evidence table | The failing point and its supporting evidence |
 | Which option should we choose? | Lettered alternatives and a comparison table | Shared criteria, tradeoffs and recommendation |
 | What happens next? | Phases or a checklist | Dependencies and observable completion criteria |
 
-- Put the answer or recommendation near the top, with the reason that matters to
-  the reader. Follow it with the main explanatory visual when useful. Keep source
-  detail close to its claim or in native `details`; do not collapse the decision,
-  critical constraints or essential caveats.
-- Use a concrete worked example when it makes an abstract rule easier to see.
-  Label synthetic examples as examples. Name actors and actions in diagrams;
-  label arrows with what moves or causes the transition.
-- Make each diagram understandable without hover: visible labels and a caption
-  explaining what to notice. Give meaningful SVGs a `viewBox`, accessible title
-  and description. Keep text readable; stack or use a scrolling region rather
-  than shrinking a dense diagram to fit a phone.
-- Charts need real supplied or verified data, units and an explanation of the
-  relevant comparison. Avoid decorative gauges, invented percentages, progress
-  bars and numbers presented as evidence.
+- Follow the answer with the main explanatory visual when useful. Put source
+  detail close to its claim or in native `details`. Keep the decision, critical
+  constraints and essential caveats visible.
+- Use a worked example when it clarifies an abstract rule. Label synthetic
+  examples. Name actors and actions in diagrams and what moves along arrows.
+- Make diagrams understandable without hover, with visible labels and a caption.
+  Give meaningful SVGs a `viewBox`, accessible title and description. Stack or
+  use native scrolling rather than shrinking dense diagrams to fit a phone.
+- Charts need supplied or verified data, units and an explanation of the relevant
+  comparison. Avoid invented percentages, decorative gauges and fake progress.
 
-## Visual design and interaction
+## Fit the host
 
-Use the design-engineering principles adapted from Emil Kowalski: each treatment
-needs a purpose, defaults should require little setup, and the document should
-feel cohesive. These principles are included here; `emil-design-eng` and its
-framework examples are not installation dependencies.
+In T3 inline mode, leave `html`, `body` and the outermost element transparent.
+Use fluid width, zero outer horizontal padding and no enclosing card, border
+or banner title. A compact content heading is fine when it explains the answer.
+Let content determine height. Avoid `100vh`, viewport-based minimum heights and
+`height: 100%` on the document; the frame grows to fit it. Use fixed pixel chart
+heights. Background panels that serve the content need at least 16px padding
+on every side and `var(--radius, 0.625rem)` corners.
 
-- Establish hierarchy with type, spacing and alignment. Use system sans-serif
-  for prose and monospace for identifiers. Start around 16px with 1.5-1.65 line
-  height and 60-75 character prose lines. Keep headings compact and specific;
-  use a wider area for comparisons and diagrams.
-- Use a small set of CSS variables for surfaces, text, spacing, borders and one
-  accent color. Reuse their meanings throughout the page. Separate sections
-  primarily with whitespace and quiet dividers; use panels to group content that
-  the reader actually compares or treats as one unit.
-- Reserve accent for the recommendation, active navigation or a relationship
-  worth following. Status colors need visible text labels. Keep normal text at
-  least 4.5:1 contrast and large text at least 3:1; muted text must remain legible.
+Use host variables through `var(--foreground, fallback)` and similar expressions.
+Never redefine T3's token names on `:root`, force `color-scheme: dark`, or copy
+its theme/message bridge into the page. T3 updates the theme live. For a
+standalone file, add scoped light/dark fallbacks, a readable page background and
+modest outer gutters. The [starter](assets/t3-inline.html) includes an explicit
+`data-delivery="standalone"` mode; read it when a reusable CSS base would help.
+Adapt its structure to the question instead of preserving its sample content.
+
+- Use system sans-serif for prose and monospace for identifiers, through the
+  host's font variables in native mode. Start at 14-16px with 1.5-1.65 line
+  height and compact headings. Prefer whitespace and quiet dividers to boxes.
+- Use semantic surface/text pairs and one accent for the recommendation or a
+  relationship worth following. Status colors need text labels. Check normal
+  text at 4.5:1 contrast, large text at 3:1 and legible muted text in both modes.
 - Avoid gradients, glow, glass effects, oversized hero type, decorative icons,
-  repeated badges and generic grids of cards unless the content gives them a
-  concrete explanatory role. Remove ornament that competes with the evidence.
-- Use native anchors for navigation, with descriptive link text and visible
-  keyboard focus. On long documents, provide a compact contents list. Native
-  `details` should disclose supporting material with a summary that names it.
-- Reading and keyboard navigation must respond immediately. Do not animate
-  content into view, stagger sections, run looping effects or hide information
-  behind hover. If a short CSS color/opacity transition helps a native control,
-  name the exact properties, avoid `transition: all`, and respect
-  `prefers-reduced-motion`. Gate hover embellishments behind
-  `(hover: hover) and (pointer: fine)`; keep equivalent keyboard focus feedback.
+  repeated badges and generic card grids. Build an explanation, not a landing
+  page. Keep tool names and rendering mechanics out of ordinary reader content.
+- Use descriptive anchors, visible keyboard focus and native `details` for
+  supporting material. Long documents can have compact contents navigation.
+- Do not animate content into view, stagger sections, loop effects or hide
+  information behind hover. If a short transition helps a control, name its
+  properties, avoid `transition: all` and respect `prefers-reduced-motion`.
+  Gate hover decoration behind `(hover: hover) and (pointer: fine)`.
 
-## Visual comparisons
+## Compare and interact
 
-- Label alternative UI mocks **A**, **B**, **C** in their visible headings so the user can choose by letter. Use only as many alternatives as the task needs.
-- Compare the same content and states at the same scale, side by side where space permits. Use matching section order and evaluation criteria. On narrow screens retain labels and reading order.
-- For process or architecture options, lettered diagrams and a comparison table are useful; do not invent UI mocks for a task without UI choices.
-- Keep the page body free of accidental horizontal overflow. Use `min-width: 0` on grid/flex children, `minmax(0, 1fr)` tracks, wrapping long identifiers and bounded media.
-- Place deliberately wide tables, code, timelines or diagrams inside a labeled, keyboard-focusable region with `max-width: 100%; overflow: auto`. Panning means native scrolling, not JavaScript drag handlers.
-- Do not hide layout defects with body-level `overflow-x: hidden` or clip unreadable content. Do not shrink a broad comparison into illegible text.
+- Label UI alternatives **A**, **B**, **C** in their visible headings. Compare
+  the same content and states at the same scale with shared criteria. Stack
+  alternatives on narrow screens, preserving their labels and reading order.
+- Keep the page free of accidental horizontal overflow. Use `min-width: 0` on
+  grid/flex children, `minmax(0, 1fr)` tracks, wrapping identifiers and bounded
+  media. Put intentionally wide tables/code/diagrams inside a labeled,
+  keyboard-focusable region with `max-width: 100%; overflow: auto`.
+  Do not hide layout defects with body-level `overflow-x: hidden`.
+- Default to semantic HTML, CSS, inline SVG and native controls. Small inline
+  JavaScript is appropriate for a requested filter, simulation or comparison
+  whose changing state helps understanding. Keep essential facts and the
+  initial explanation readable without execution or network access. Skip
+  scripts for ordinary specifications and static comparisons.
+- Controls must work and state what they change. Keep interactions local to
+  the document; do not imply they write to the repository, ERP or chat. Use
+  native listeners and controls, no frameworks, remote scripts or JavaScript
+  URLs. A user-requested static/no-JS deliverable takes precedence.
 
-## Review, upload, then view
+## Verify and deliver
 
-1. Draft locally outside product source unless repository delivery is requested. Review byte size, script/event/remote-asset absence, links, accessible headings and the actual content using the available tools. No bundled validator or language runtime is required.
-2. Discover an authorized upload/attachment destination. Prefer the current app's private attachment mechanism or a destination the user chose. A request for a document does not authorize publishing private project content on a public host.
-3. Upload the exact reviewed bytes. Wait for an explicit successful receipt. Preserve the returned attachment ID or URL and verify the uploaded size/hash when supported. Preparing an upload URL, starting a local server, or writing a local file is **not** successful upload.
-4. **Never open a browser or claim the document is hosted before upload succeeds.** Do not start a local preview server as a substitute. If upload fails or the destination is unknown, report that fact and provide the local file without opening it. Ask only for the missing destination/authorization.
-5. After upload succeeds, browser review is allowed. Use the environment's preferred browser tools. Check a desktop width around 1440px, a narrow width around 390px and 200% zoom. Confirm readable diagram labels, visible keyboard focus, usable comparison scrolling, adequate contrast and no body overflow. Check that a reader can identify the decision, understand the main visual and find its evidence without opening every detail. Page content still must not require JavaScript. Browser inspection scripts may measure layout; they must never be shipped in the document.
-6. If review changes the file, review the new exact version and upload it before claiming the link is current. Distinguish an attachment available for download from a hosted/rendered webpage.
+1. Draft outside product source unless repository delivery is requested. Review
+   UTF-8 size, references, assets, headings and substantive content. An upload
+   receipt or screenshot alone does not prove the explanation is correct.
+2. In T3, preview the exact document with `html_preview` before publishing.
+   Check the reply width, a phone width and both appearances. Inspect screenshots,
+   `contentHeight`, console errors and missing images. Revise and re-preview
+   affected cases. Details are in [the native flow](references/t3-code.md#preview-and-render).
+3. For a standalone file, local browser review is allowed before any upload.
+   Use the runtime's preferred browser tools and check desktop, phone and 200%
+   zoom where supported. For either mode, verify readable labels, keyboard
+   focus, intentional scrolling and no body overflow. Exercise added scripts
+   with actual controls; a static preview does not prove interaction works.
+   Inspection scripts are not shipped unless part of the requested interaction.
+4. In T3, call `html_render` with the reviewed document, short title and measured
+   height. Preserve its successful attachment reference. Do not substitute a
+   code block, local server, upload-URL preparation or full browser preview for
+   native rendering. If native preview/render fails, diagnose the reported
+   prerequisite or actionable error; if unavailable, deliver the standalone
+   file and state the unverified part. Do not claim an inline render succeeded.
+5. For file delivery, attach the exact reviewed bytes if a private mechanism is
+   available. Wait for its successful receipt before claiming upload. Otherwise
+   provide the local link. Review and redeliver changed bytes before calling
+   an attachment current. Do not replace the HTML with a ZIP or framework.
 
-Deliver the successful attachment/link with a short summary and any unverified limitations. Do not replace the HTML with a ZIP, multiple files or a framework project.
+After a successful inline render, the final reply adds only what the page does
+not already say, such as a repository change or a verification limit. Do not
+announce the page or repeat its conclusions. For file delivery, give its link
+and a short summary, distinguishing download, local file and hosted page.

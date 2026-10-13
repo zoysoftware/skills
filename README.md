@@ -6,11 +6,12 @@ Se pueden instalar globalmente en Windows, Linux y macOS mediante
 
 | Skill | Para qué sirve |
 | --- | --- |
-| [html-communication](skills/html-communication/SKILL.md) | Explicar especificaciones, planes y alternativas en un HTML autónomo, visual y legible, con diagramas y comparaciones cuando ayuden. |
+| [html-communication](skills/html-communication/SKILL.md) | Explicar análisis y alternativas con HTML integrado en el chat de T3 Code o como archivo autónomo, con diagramas y comparaciones cuando ayuden. |
 | [unslop](skills/unslop/SKILL.md) | Eliminar frases vacías, adornos y patrones de escritura artificial. |
 
-`html-communication` usa `unslop`; instalar ambas. Las skills contienen solamente
-instrucciones y no ejecutan scripts de validación.
+`html-communication` usa `unslop`; instalar ambas. Incluye instrucciones,
+una referencia del contrato de T3 Code y una plantilla HTML reutilizable.
+La instalación no ejecuta scripts de validación ni añade las herramientas de T3.
 
 ## Instalar
 
@@ -52,13 +53,31 @@ sistema operativo.
 En Codex, por ejemplo:
 
 ```text
-Usa $html-communication para comparar estas opciones en un documento HTML.
+Usa $html-communication para comparar estas opciones visualmente en el chat.
 Usa $unslop para revisar la redacción.
 ```
 
-El HTML generado es un único archivo con estilos y recursos incorporados,
-sin JavaScript ni dependencias de red. La skill guía la revisión del contenido,
-la entrega y la comprobación del diseño en escritorio y pantalla estrecha.
+Cuando T3 Code expone `html_preview` y `html_render`, la skill comprueba la
+página y la muestra dentro de la conversación. El contenido hereda el tema,
+las fuentes y el ancho del chat, sin un marco exterior ni fondo oscuro fijo.
+La [referencia de T3](skills/html-communication/references/t3-code.md) documenta
+los colores, tamaños y el flujo de entrega. La
+[plantilla](skills/html-communication/assets/t3-inline.html) permite empezar
+con comparaciones adaptables a escritorio y móvil.
+
+Sin esas herramientas, o si se pide un archivo, entrega un HTML autónomo con
+estilos y recursos incorporados. HTML, CSS y controles nativos son la base;
+JavaScript inline queda reservado para interacciones locales que ayuden a
+entender el contenido. Los datos y la explicación inicial siguen siendo legibles
+sin ejecución ni red. Para pedir un documento estático explícitamente:
+
+```text
+Usa $html-communication para comparar estas opciones en un archivo HTML autónomo sin JavaScript.
+```
+
+La skill guía la revisión del contenido, contraste, foco y diseño en escritorio
+y móvil. No depende del monorepo ni requiere un destino de hosting para entregar
+el documento.
 
 ## Mejorar las skills
 
